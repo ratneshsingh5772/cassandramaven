@@ -1,6 +1,6 @@
 package com.maven.mavenr.mapper;
 
-import com.maven.mavenr.dto.UserDTO;
+import com.maven.mavenr.dto.*;
 import com.maven.mavenr.model.User;
 
 public class UserMapper {
@@ -16,14 +16,22 @@ public class UserMapper {
         );
     }
 
-    public static User toEntity(UserDTO userDTO) {
-        if (userDTO == null) {
+    public static User toEntity(UserCreateDTO createDTO) {
+        if (createDTO == null) {
             return null;
         }
         User user = new User();
-        user.setId(userDTO.getId());
-        user.setName(userDTO.getName());
-        user.setEmail(userDTO.getEmail());
+        user.setName(createDTO.getName());
+        user.setEmail(createDTO.getEmail());
         return user;
+    }
+
+    public static void updateEntity(User user, UserUpdateDTO updateDTO) {
+        if (updateDTO.getName() != null) {
+            user.setName(updateDTO.getName());
+        }
+        if (updateDTO.getEmail() != null) {
+            user.setEmail(updateDTO.getEmail());
+        }
     }
 }
